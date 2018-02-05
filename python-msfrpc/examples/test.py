@@ -1,30 +1,30 @@
 #!/usr/bin/env python
-# MSF-RPC - A  Python library to facilitate MSG-RPC communication with Metasploit
+# MSF-RPC - Una librería python para facilitar la comunicación MSG-RPC con Metasploit
 # Ryan Linn  - RLinn@trustwave.com
 # Copyright (C) 2011 Trustwave
-# This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+# Este programa es software libre: puede redistribuirlo y / o modificarlo bajo los términos de la Licencia Pública General de GNU publicada por la Free Software Foundation, ya sea la versión 3 de la Licencia, o (a su elección) cualquier versión posterior.
 
-# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# Este programa se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; sin siquiera la garantía implícita de COMERCIABILIDAD o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Ver la Licencia Pública General de GNU para más detalles.
 
-# You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
+# Debería haber recibido una copia de la Licencia Pública General de GNU junto con este programa. De lo contrario, consulte <http://www.gnu.org/licenses/>.
 
 import msfrpc
 
 if __name__ == '__main__':
   
-  # Create a new instance of the Msfrpc client with the default options
+  # Cree una nueva instancia del cliente Msfrpc con las opciones predeterminadas
   client = msfrpc.Msfrpc({})
 
-  # Login to the msfmsg server using the password "abc123"
+  # Inicie sesión en el servidor msfmsg con la contraseña "abc123"
   client.login('msf','abc123')
 
-  # Get a list of the exploits from the server
+  # Obtenga una lista de los exploits del servidor
   mod = client.call('module.exploits')
   
-  # Grab the first item from the modules value of the returned dict
+  # Toma el primer elemento del valor de los módulos del diccionario devuelto
   print "Compatible payloads for : %s\n" % mod['modules'][0]
   
-  # Get the list of compatible payloads for the first option
+  # Obtenga la lista de cargas útiles compatibles para la primera opción
   ret = client.call('module.compatible_payloads',[mod['modules'][0]])
   for i in (ret.get('payloads')):
     print "\t%s" % i
